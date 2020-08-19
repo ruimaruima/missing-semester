@@ -89,10 +89,10 @@ missing:~$
 ```
 
 This is the main textual interface to the shell. It tells you that you
-are on the machine `missing` and that your "current working directory",
-or where you currently are, is `~` (short for "home"). The `$` tells you
-that you are not the root user (more on that later). At this prompt you
-can type a _command_, which will then be interpreted by the shell. The
+are on the **machine** `missing` and that your **"current working directory"**,
+or where you currently are, is `~` (short for **"home"**). The `$` tells you
+that you are not the **root user** (more on that later). At this prompt you
+can type a **_command_**, which will then be **interpreted** by the shell. The
 most basic command is to execute a program:
 
 ```console
@@ -101,18 +101,18 @@ Fri 10 Jan 2020 11:49:31 AM EST
 missing:~$ 
 ```
 
-Here, we executed the `date` program, which (perhaps unsurprisingly)
-prints the current date and time. The shell then asks us for another
-command to execute. We can also execute a command with _arguments_:
+Here, we **executed** the `date` program, which (perhaps unsurprisingly)
+**prints** the current date and time. The shell then asks us for another
+command to execute. We can also execute a command with **_arguments_**:
 
 ```console
 missing:~$ echo hello
 hello
 ```
 
-In this case, we told the shell to execute the program `echo` with the
-argument `hello`. The `echo` program simply prints out its arguments.
-The shell parses the command by splitting it by whitespace, and then
+In this case, we told the shell to execute the **program** `echo` with the
+**argument** `hello`. The `echo` program simply prints out its arguments.
+The shell parses the command by splitting it by **whitespace**, and then
 runs the program indicated by the first word, supplying each subsequent
 word as an argument that the program can access. If you want to provide
 an argument that contains spaces or other special characters (e.g., a
@@ -122,7 +122,7 @@ or `"` (`"My Photos"`), or escape just the relevant characters with `\`
 
 But how does the shell know how to find the `date` or `echo` programs?
 Well, the shell is a programming environment, just like Python or Ruby,
-and so it has variables, conditionals, loops, and functions (next
+and so it has **variables**, **conditionals**, **loops**, and **functions** (next
 lecture!). When you run commands in your shell, you are really writing a
 small bit of code that your shell interprets. If the shell is asked to
 execute a command that doesn't match one of its programming keywords, it
@@ -152,11 +152,11 @@ _path_ to the file we want to execute.
 
 A path on the shell is a delimited list of directories; separated by `/`
 on Linux and macOS and `\` on Windows. On Linux and macOS, the path `/`
-is the "root" of the file system, under which all directories and files
+is the **"root"** of the file system, under which all directories and files
 lie, whereas on Windows there is one root for each disk partition (e.g.,
 `C:\`). We will generally assume that you are using a Linux filesystem
-in this class. A path that starts with `/` is called an _absolute_ path.
-Any other path is a _relative_ path. Relative paths are relative to the
+in this class. A path that starts with `/` is called an **_absolute_ path**.
+Any other path is a **_relative_ path**. Relative paths are relative to the
 current working directory, which we can see with the `pwd` command and
 change with the `cd` command. In a path, `.` refers to the current
 directory, and `..` to its parent directory:
@@ -359,7 +359,11 @@ there.
 # Exercises
 
  1. Create a new directory called `missing` under `/tmp`.
+ ```
+ cd ~/tmp
+ ```
  1. Look up the `touch` program. The `man` program is your friend.
+ 
  1. Use `touch` to create a new file called `semester` in `missing`.
  1. Write the following into that file, one line at a time:
     ```

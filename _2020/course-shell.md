@@ -81,7 +81,7 @@ fairly easily.
 
 ## Using the shell
 
-When you launch your terminal, you will see a _prompt_ that often looks
+When you launch your terminal, you will see a **_prompt_** that often looks
 a little like this:
 
 ```console
@@ -206,8 +206,8 @@ home
 ```
 
 Unless a directory is given as its first argument, `ls` will print the
-contents of the current directory. Most commands accept flags and
-options (flags with values) that start with `-` to modify their
+contents of the current directory. Most commands accept **flags** and
+**options** (flags with values) that start with `-` to modify their
 behavior. Usually, running a program with the `-h` or `--help` flag
 (`/?` on Windows) will print some help text that tells you what flags
 and options are available. For example, `ls --help` tells us:
@@ -224,14 +224,14 @@ drwxr-xr-x 1 missing  users  4096 Jun 15  2019 missing
 This gives us a bunch more information about each file or directory
 present. First, the `d` at the beginning of the line tells us that
 `missing` is a directory. Then follow three groups of three characters
-(`rwx`). These indicate what permissions the owner of the file
-(`missing`), the owning group (`users`), and everyone else respectively
+(`rwx`). These indicate what **permissions** the owner of the **file**
+(`missing`), the owning **group** (`users`), and everyone else respectively
 have on the relevant item. A `-` indicates that the given principal does
 not have the given permission. Above, only the owner is allowed to
-modify (`w`) the `missing` directory (i.e., add/remove files in it). To
-enter a directory, a user must have "search" (represented by "execute":
+**modify** (`w`) the `missing` directory (i.e., add/remove files in it). To
+enter a directory, a user must have **"search"** (represented by **"execute"**:
 `x`) permissions on that directory (and its parents). To list its
-contents, a user must have read (`r`) permissions on that directory. For
+contents, a user must have **read** (`r`) permissions on that directory. For
 files, the permissions are as you would expect. Notice that nearly all
 the files in `/bin` have the `x` permission set for the last group,
 "everyone else", so that anyone can execute those programs.
@@ -242,8 +242,8 @@ directory).
 
 If you ever want _more_ information about a program's arguments, inputs,
 outputs, or how it works in general, give the `man` program a try. It
-takes as an argument the name of a program, and shows you its _manual
-page_. Press `q` to exit.
+takes as an argument the name of a program, and shows you its **_manual
+page_**. Press `q` to exit.
 
 ```console
 missing:~$ man ls
@@ -251,14 +251,14 @@ missing:~$ man ls
 
 ## Connecting programs
 
-In the shell, programs have two primary "streams" associated with them:
-their input stream and their output stream. When the program tries to
+In the shell, programs have two primary **"streams"** associated with them:
+their **input stream** and their **output stream**. When the program tries to
 read input, it reads from the input stream, and when it prints
 something, it prints to its output stream. Normally, a program's input
-and output are both your terminal. That is, your keyboard as input and
+and output are both your **terminal**. That is, your keyboard as input and
 your screen as output. However, we can also rewire those streams!
 
-The simplest form of redirection is `< file` and `> file`. These let you
+The simplest form of **redirection** is `< file` and `> file`. These let you
 rewire the input and output streams of a program to a file respectively:
 
 ```console
@@ -273,8 +273,8 @@ hello
 ```
 
 You can also use `>>` to append to a file. Where this kind of
-input/output redirection really shines is in the use of _pipes_. The `|`
-operator lets you "chain" programs such that the output of one is the
+input/output redirection really shines is in the use of **_pipes_**. The `|`
+operator lets you **"chain"** programs such that the output of one is the
 input of another:
 
 ```console
@@ -284,7 +284,7 @@ missing:~$ curl --head --silent google.com | grep --ignore-case content-length |
 219
 ```
 
-We will go into a lot more detail about how to take advantage of pipes
+We will go into a lot more detail about how to take advantage of **pipes**
 in the lecture on data wrangling.
 
 ## A versatile and powerful tool
@@ -295,14 +295,14 @@ all access restrictions, and can create, read, update, and delete any
 file in the system. You will not usually log into your system as the
 root user though, since it's too easy to accidentally break something.
 Instead, you will be using the `sudo` command. As its name implies, it
-lets you "do" something "as su" (short for "super user", or "root").
-When you get permission denied errors, it is usually because you need to
+lets you "do" something "as su" (short for **"super user"**, or "root").
+When you get **permission denied** errors, it is usually because you need to
 do something as root. Though make sure you first double-check that you
 really wanted to do it that way!
 
 One thing you need to be root in order to do is writing to the `sysfs` file
-system mounted under `/sys`. `sysfs` exposes a number of kernel parameters as
-files, so that you can easily reconfigure the kernel on the fly without
+system mounted under `/sys`. `sysfs` exposes a number of **kernel parameters** as
+files, so that you can easily **reconfigure** the kernel on the fly without
 specialized tools. **Note that sysfs does not exist on Windows or macOS.**
 
 For example, the brightness of your laptop's screen is exposed through a file
@@ -331,8 +331,8 @@ program. `echo` and friends do not "know" about `|`. They just read from
 their input and write to their output, whatever it may be. In the case
 above, the _shell_ (which is authenticated just as your user) tries to
 open the brightness file for writing, before setting that as `sudo
-echo`'s output, but is prevented from doing so since the shell does not
-run as root. Using this knowledge, we can work around this:
+echo`'s output, but is prevented from doing so since **the shell does not
+run as root**. Using this knowledge, we can work around this:
 
 ```console
 $ echo 3 | sudo tee brightness
@@ -360,38 +360,68 @@ there.
 
  1. Create a new directory called `missing` under `/tmp`.
  ```
- cd ~/tmp
+ cd /tmp/missing
  ```
  1. Look up the `touch` program. The `man` program is your friend.
+ ```
+ man touch
+ ```
  
  1. Use `touch` to create a new file called `semester` in `missing`.
+ ```
+ touch /tmp/missing/semester
+ ```
+ 
  1. Write the following into that file, one line at a time:
     ```
     #!/bin/sh
     curl --head --silent https://missing.csail.mit.edu
     ```
     The first line might be tricky to get working. It's helpful to know that
-    `#` starts a comment in Bash, and `!` has a special meaning even within
+    `#` starts a **comment** in Bash, and `!` has a special meaning even within
     double-quoted (`"`) strings. Bash treats single-quoted strings (`'`)
     differently: they will do the trick in this case. See the Bash
     [quoting](https://www.gnu.org/software/bash/manual/html_node/Quoting.html)
     manual page for more information.
+    
  1. Try to execute the file, i.e. type the path to the script (`./semester`)
     into your shell and press enter. Understand why it doesn't work by
     consulting the output of `ls` (hint: look at the permission bits of the
     file).
+```
+zsh: permission denied: ./semester
+```
+
  1. Run the command by explicitly starting the `sh` interpreter, and giving it
     the file `semester` as the first argument, i.e. `sh semester`. Why does
     this work, while `./semester` didn't?
+    
+```
+sh semester
+```
+    
  1. Look up the `chmod` program (e.g. use `man chmod`).
+ ```
+ man chmod
+ ```
+ 
  1. Use `chmod` to make it possible to run the command `./semester` rather than
     having to type `sh semester`. How does your shell know that the file is
     supposed to be interpreted using `sh`? See this page on the
     [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)) line for more
     information.
+```
+chmod +x semester
+```
+
  1. Use `|` and `>` to write the "last modified" date output by
     `semester` into a file called `last-modified.txt` in your home
     directory.
+    
+```
+stat -f "%m%t%Sm %N" semester | > last-modified.txt
+```
+    
  1. Write a command that reads out your laptop battery's power level or your
     desktop machine's CPU temperature from `/sys`. Note: if you're a macOS
     user, your OS doesn't have sysfs, so you can skip this exercise.

@@ -8,24 +8,24 @@ video:
   id: kgII-YWo3Zw
 ---
 
-In this lecture, we will present some of the basics of using bash as a scripting language along with a number of shell tools that cover several of the most common tasks that you will be constantly performing in the command line.
+In this lecture, we will present some of the basics of using **bash** as a scripting language along with a number of shell tools that cover several of the most common tasks that you will be constantly performing in the command line.
 
 # Shell Scripting
 
-So far we have seen how to execute commands in the shell and pipe them together.
-However, in many scenarios you will want to perform a series of commands and make use of control flow expressions like conditionals or loops.
+So far we have seen how to **execute** commands in the shell and **pipe** them together.
+However, in many scenarios you will want to perform a series of commands and make use of control **flow expressions** like **conditionals** or **loops**.
 
 Shell scripts are the next step in complexity.
-Most shells have their own scripting language with variables, control flow and its own syntax.
+Most shells have their own scripting language with **variables**, **control flow** and its own **syntax**.
 What makes shell scripting different from other scripting programming language is that it is optimized for performing shell-related tasks.
-Thus, creating command pipelines, saving results into files, and reading from standard input are primitives in shell scripting, which makes it easier to use than general purpose scripting languages.
+Thus, creating command **pipelines**, saving results into files, and reading from standard input are primitives in shell scripting, which makes it easier to use than general purpose scripting languages.
 For this section we will focus on bash scripting since it is the most common.
 
 To assign variables in bash, use the syntax `foo=bar` and access the value of the variable with `$foo`.
 Note that `foo = bar` will not work since it is interpreted as calling the `foo` program with arguments `=` and `bar`.
-In general, in shell scripts the space character will perform argument splitting. This behavior can be confusing to use at first, so always check for that.
+In general, in shell scripts the **space character** will perform **argument splitting**. This behavior can be confusing to use at first, so always check for that.
 
-Strings in bash can be defined with `'` and `"` delimiters, but they are not equivalent.
+Strings in bash can be defined with `'` and `"` **delimiters**, but they are not equivalent.
 Strings delimited with `'` are literal strings and will not substitute variable values whereas `"` delimited strings will.
 
 ```bash
@@ -36,7 +36,7 @@ echo '$foo'
 # prints $foo
 ```
 
-As with most programming languages, bash supports control flow techniques including `if`, `case`, `while` and `for`.
+As with most programming languages, bash supports **control flow** techniques including `if`, `case`, `while` and `for`.
 Similarly, `bash` has functions that take arguments and can operate with them. Here is an example of a function that creates a directory and `cd`s into it.
 
 
@@ -47,7 +47,7 @@ mcd () {
 }
 ```
 
-Here `$1` is the first argument to the script/function.
+Here `$1` is the first **argument** to the script/function.
 Unlike other scripting languages, bash uses a variety of special variables to refer to arguments, error codes, and other relevant variables. Below is a list of some of them. A more comprehensive list can be found [here](https://www.tldp.org/LDP/abs/html/special-chars.html).
 - `$0` - Name of the script
 - `$1` to `$9` - Arguments to the script. `$1` is the first argument and so on.
@@ -59,8 +59,8 @@ Unlike other scripting languages, bash uses a variety of special variables to re
 - `$_` - Last argument from the last command. If you are in an interactive shell, you can also quickly get this value by typing `Esc` followed by `.`
 
 Commands will often return output using `STDOUT`, errors through `STDERR`, and a Return Code to report errors in a more script-friendly manner.
-The return code or exit status is the way scripts/commands have to communicate how execution went.
-A value of 0 usually means everything went OK; anything different from 0 means an error occurred.
+The return code or exit status is the way scripts/commands have to communicate how execution went. 
+**A value of 0 usually means everything went OK**; **anything different from 0 means an error occurred**.
 
 Exit codes can be used to conditionally execute commands using `&&` (and operator) and `||` (or operator), both of which are [short-circuiting](https://en.wikipedia.org/wiki/Short-circuit_evaluation) operators. Commands can also be separated within the same line using a semicolon `;`.
 The `true` program will always have a 0 return code and the `false` command will always have a 1 return code.
@@ -86,10 +86,10 @@ false ; echo "This will always run"
 # This will always run
 ```
 
-Another common pattern is wanting to get the output of a command as a variable. This can be done with _command substitution_.
+Another common pattern is wanting to get the output of a command as a variable. This can be done with **_command substitution_**.
 Whenever you place `$( CMD )` it will execute `CMD`, get the output of the command and substitute it in place.
 For example, if you do `for file in $(ls)`, the shell will first call `ls` and then iterate over those values.
-A lesser known similar feature is _process substitution_, `<( CMD )` will execute `CMD` and place the output in a temporary file and substitute the `<()` with that file's name. This is useful when commands expect values to be passed by file instead of by STDIN. For example, `diff <(ls foo) <(ls bar)` will show differences between files in dirs  `foo` and `bar`.
+A lesser known similar feature is **_process substitution_**, `<( CMD )` will execute `CMD` and place the output in a temporary file and substitute the `<()` with that file's name. This is useful when commands expect values to be passed by file instead of by STDIN. For example, `diff <(ls foo) <(ls bar)` will show differences between files in dirs  `foo` and `bar`.
 
 
 Since that was a huge information dump, let's see an example that showcases some of these features. It will iterate through the arguments we provide, `grep` for the string `foobar`, and append it to the file as a comment if it's not found.
